@@ -3,6 +3,8 @@
 - [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
   - [Introduction](#introduction)
   - [Motive](#motive)
+  - [How to use these programs?](#how-to-use-these-programs)
+  - [A Note on Unit Tests](#a-note-on-unit-tests)
   - [How can I help?](#how-can-i-help)
   - [List of Programs](#list-of-programs)
 
@@ -26,6 +28,30 @@ to guide and educate. This work is liberally licensed under the
 MIT License, therefore, fellow developers can reuse this code in their
 projects as long they provide attribution and follow the (very lenient)
 terms of use, you should be grand.
+
+## How to use these programs?
+
+This is not meant to be a project that creates one (or a set number) of
+binaries that can be executed. It is merely a collection of different types
+of programs, with different problems to solve. Consequently, it doesn't make
+sense to create a single makefile to compile all the sources into libraries.
+
+The project organization is important. All programs are self-contained in
+their respective folders. Take the entire folder and put it in your project.
+The licences are already there, along with the READMEs, so there's a lot of
+effort saved. This is a modular project. With independent units. Pick and
+choose to suit your needs.
+
+## A Note on Unit Tests
+
+Throughout the project, I have made use of [John Brewer's](http://www.jera.com/),
+MinUnit - a minimal unit testing framework for C. Find it [here](http://www.jera.com/techinfo/jtns/jtn002.html).
+
+The reason I used this and not more established test suites is because of
+its ridiculous simplicity and plug-and-play nature. It is a completely header-based
+unit testing framework and writing unit tests is super easy. Check any of my
+`test.c` files and you will agree. Having this ensures that people will have less
+excuses not to unit test their code. Even if it's C.
 
 ## How can I help?
 
