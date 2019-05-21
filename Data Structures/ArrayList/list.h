@@ -59,6 +59,11 @@ typedef struct arr_list_struct ArrayList;
  * NOTE: It is recommended to supply the width of the base datatype using
  * the `sizeof()` keyword. This works for almost all possible cases.
  * 
+ * Whenever an ArrayList is initialized, do not forget to free it after
+ * use. Initialization acquires resources, freeing deallocated them. It
+ * is crucial in order to avoid memory leaks. Use `free_array_list(&list)`
+ * to clear the allocated memory.
+ * 
  * +----------------+--------------+---------------------------------+
  * | Parameter name | Type         | Description                     |
  * +----------------+--------------+---------------------------------+
@@ -70,6 +75,19 @@ typedef struct arr_list_struct ArrayList;
 char *initialize_array_list(ArrayList *list,
                             const size_t capacity,
                             const size_t width);
+
+/**
+ * Deallocates all the memory that had been acquired by an ArrayList.
+ * This must be called after all work is completed with the aforementioned
+ * ArrayList.
+ * 
+ * +----------------+--------------+---------------------------------+
+ * | Parameter name | Type         | Description                     |
+ * +----------------+--------------+---------------------------------+
+ * | list           | ArrayList*   | Pointer to an existing list.    |
+ * +----------------+--------------+---------------------------------+
+ */
+char *free_array_list(ArrayList *list);
 
 /**
  * Iterates through every element in the array and applies the function

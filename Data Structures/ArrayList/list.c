@@ -86,7 +86,7 @@ char *display_array_list(const ArrayList *list,
 // SECTION Micro manipulation methods. For adding, removing, changing single items.
 
 static char *_update_storage_size_(ArrayList *list,
-                              const size_t new_capacity)
+                                   const size_t new_capacity)
 {
     list->data = realloc(list->data, new_capacity * list->width);
     if (!list->data)
@@ -174,7 +174,7 @@ char *insert_in_array_list(ArrayList *list,
     }
     size_t move_length = list->length - index;
     char *location = ((char *)list->data) + list->width * index;
-    
+
     // Check if we have enough space
     if (list->length == list->capacity)
     {
@@ -188,10 +188,52 @@ char *insert_in_array_list(ArrayList *list,
     // Keep the destination 1 (width) higher, to accomodate for the new element.
     // memmove works in bytes, so everything needs to be multiplied by the width.
     memmove(location + list->width, location, move_length * list->width);
-    
+
     // Copy the new element in position.
     memcpy(((char *)list->data) + list->width * index, element, list->width);
+
+    // Increment the value of length
+    list->length++;
+
     return NULL;
+}
+
+char *delete_index_array_list(ArrayList *list,
+                              const size_t index)
+{
+    // Standard validation tests
+    if (!list)
+    {
+        return NULL_ARG;
+    }
+    if (index < 0 || index > list->length)
+    {
+        return INVALID_INDEX;
+    }
+
+    // Overwrite the data with the elements that follow it.
+    if (index < list->length - 1)
+    {
+        char *location = ((char *)list->data) + list->width * index;
+        size_t move_length = list->length - index;
+        memmove(location, location + list->width, move_length * list->width);
+    }
+
+    // Decrease the length by 1
+    list->length--;
+
+    // If it is just the last element, we clear it away anyway afterwards
+    memset((char *)list->data + list->length * list->width, 0, list->width);
+
+    char *result = NULL;
+    // If the current length is less than a quarter of the current capacoty
+    // we might be wasting space. So we halve the space consumption.
+    if (list->length < list->capacity / 4)
+    {
+        result = _shrink_storage_(list);
+    }
+
+    return result;
 }
 
 //// Temporary functions for testing code. Will not be shipped.
@@ -213,9 +255,9 @@ void display_int(const size_t index, void *element)
 
 int main(int argc, char const *argv[])
 {
-    const size_t capacity = 3;
+    const size_t capacity = 10;
     const size_t width = sizeof(int);
-    const int vals[] = {10, 20, 30, 40, 50, 60};
+    int vals[30];
 
     const int new_val1 = 25;
     const int new_val2 = 20;
@@ -225,14 +267,25 @@ int main(int argc, char const *argv[])
 
     for (size_t index = 0; index < sizeof(vals) / width; index++)
     {
+        vals[index] = (index + 1) * 10;
         checkResult(append_to_array_list(&list, (void *)(vals + index)));
     }
 
     checkResult(set_array_list(&list, 2, &new_val1));
     checkResult(insert_in_array_list(&list, 2, &new_val2));
+    checkResult(delete_index_array_list(&list, 4));
     checkResult(display_array_list(&list, display_int));
-    
-    
+
+    size_t current_capacity = list.length;
+    while (current_capacity >= 3)
+    {
+        checkResult(delete_index_array_list(&list, 0));
+        current_capacity--;
+    }
+    printf("\n\n\n");
+    checkResult(display_array_list(&list, display_int));
+
+
     checkResult(free_array_list(&list));
 
     printf("Size of ArrayList is %" PRIuMAX "\n", list.length);
