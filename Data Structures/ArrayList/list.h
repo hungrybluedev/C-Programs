@@ -52,6 +52,8 @@ struct arr_list_struct
 
 typedef struct arr_list_struct ArrayList;
 
+// SECTION: Initialization and Deallocation methods.
+
 /**
  * Initializes an empty ArrayList with the specified `capacity` and the
  * required `width` of the datatypes to be stored in the list.
@@ -91,28 +93,53 @@ char *free_array_list(ArrayList *list);
 
 /**
  * Iterates through every element in the array and applies the function
- * provided to all elements.
+ * provided to all elements (which generally means printing to the
+ * specified stream).
  * 
  * NOTE: Here's an example of how to use this function with integers:
  * 
- * void display_int(const size_t index, void *element)
+ * void display_int(FILE *out_stream, const size_t index, void *element)
  * {
- *     printf("%" PRIuMAX ". %d\n", index, *((int *)element));
+ *     fprintf(out_stream, "%" PRIuMAX ". %d\n", index, *((int *)element));
  * }
  * 
  * int main()
  * {
  *     // ...
- *     char *result = display_array_list(&list, display_int);
+ *     char *result = output_array_list(stdout, &list, display_int);
  *     // ...
  * }
  * 
+ * +----------------+--------------+----------------------------------+
+ * | Parameter name | Type         | Description                      |
+ * +----------------+--------------+----------------------------------+
+ * | out_stream     | FILE*        | Pointer to the output stream.    |
+ * | list           | ArrayList*   | Pointer to an existing list.     |
+ * | (*display)     | function     | Function that operates on the    |
+ * | -  out_stream  |   pointer    |  individual element of the list  |
+ * | -  index       |              |  with the details and outputs to |
+ * | -  element     |              |  out_stream.                     |
+ * +----------------+--------------+----------------------------------+
  * 
  */
-char *display_array_list(const ArrayList *list,
-                         const void (*display)(const size_t index, void *element));
+char *output_array_list(FILE *out_stream,
+                        const ArrayList *list,
+                        const void (*display)(
+                            FILE *out_stream,
+                            const size_t index,
+                            const void *element));
 
 char *append_to_array_list(ArrayList *list,
                            const void *element);
 
+char *add_all_to_array_list(ArrayList *list,
+                            const void *array,
+                            const size_t count);
+
+char *insert_in_array_list(ArrayList *list,
+                           const size_t index,
+                           const void *element);
+
+char *delete_index_array_list(ArrayList *list,
+                              const size_t index);
 #endif //ARRAY_LIST_H

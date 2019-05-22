@@ -69,8 +69,12 @@ char *free_array_list(ArrayList *list)
 
 // SECTION Display methods; useful for debugging.
 
-char *display_array_list(const ArrayList *list,
-                         const void (*display)(const size_t index, void *element))
+char *output_array_list(FILE *out_stream,
+                        const ArrayList *list,
+                        const void (*display)(
+                            FILE *out_stream,
+                            const size_t index,
+                            const void *element))
 {
     if (!list)
     {
@@ -78,7 +82,7 @@ char *display_array_list(const ArrayList *list,
     }
     for (size_t index = 0; index < list->length; index++)
     {
-        (*display)(index, ((char *)list->data) + (index * list->width));
+        (*display)(out_stream, index, ((char *)list->data) + (index * list->width));
     }
     return NULL;
 }
@@ -136,6 +140,40 @@ char *append_to_array_list(ArrayList *list,
     return NULL;
 }
 
+char *add_all_to_array_list(ArrayList *list,
+                            const void *array,
+                            const size_t count)
+{
+    if (!list)
+    {
+        return NULL_ARG;
+    }
+    if (!array)
+    {
+        return EMPTY_SRC;
+    }
+    size_t new_length = list->length + count;
+
+    // Check if we have enough space. Sometimes,
+    // one expansion might not be enough. Repeat until
+    // we are fully capable of accomodating all.
+    while (new_length > list->capacity)
+    {
+        char *result = _extend_storage_(list);
+        if (result)
+        {
+            return result;
+        }
+    }
+    // Copy the elements to the required location
+    memcpy(((char *)list->data) + (list->length * list->width), array, list->width * count);
+
+    // Update the value of length
+    list->length = new_length;
+
+    return NULL;
+}
+
 char *set_array_list(ArrayList *list,
                      const size_t index,
                      const void *element)
@@ -153,6 +191,27 @@ char *set_array_list(ArrayList *list,
         return EMPTY_SRC;
     }
     memcpy(((char *)list->data) + list->width * index, element, list->width);
+    return NULL;
+}
+
+char *get_from_array_list(ArrayList *list,
+                          const size_t index,
+                          void *destination)
+{
+    if (!list)
+    {
+        return NULL_ARG;
+    }
+    if (index < 0 || index > list->length)
+    {
+        return INVALID_INDEX;
+    }
+    if (destination)
+    {
+        return "Null destination. Please provide a valid destination address.";
+    }
+    memcpy(destination, ((char *)list->data) + list->width * index, list->width);
+
     return NULL;
 }
 
@@ -236,60 +295,83 @@ char *delete_index_array_list(ArrayList *list,
     return result;
 }
 
+// SECTION Comparison
+
+int compare_array_lists(const ArrayList *listA,
+                        const ArrayList *listB,
+                        int (*cmp)(void *elementA, void *elementB))
+{
+    if (!listA)
+    {
+        // Ordering is set as null < non-null;
+        return listB == 0 ? 0 : -1;
+    }
+    if (!listB)
+    {
+        return 1;
+    }
+    // Compare with respect to number of elements first.
+    if (listA->length != listB->length)
+    {
+        return (int)(listA->length - listB->length);
+    }
+    // Lengths are equal, 
+    return 0;
+}
+
 //// Temporary functions for testing code. Will not be shipped.
 //// TODO: Remove once done.
 
-void checkResult(char *message)
-{
-    if (message)
-    {
-        printf("%s\n", message);
-        exit(EXIT_FAILURE);
-    }
-}
+// void checkResult(char *message)
+// {
+//     if (message)
+//     {
+//         printf("%s\n", message);
+//         exit(EXIT_FAILURE);
+//     }
+// }
 
-void display_int(const size_t index, void *element)
-{
-    printf("%" PRIuMAX ". %d\n", index, *((int *)element));
-}
+// void display_int(FILE *out_stream, const size_t index, const void *element)
+// {
+//     fprintf(out_stream, "%" PRIuMAX ". %d\n", index, *((int *)element));
+// }
 
-int main(int argc, char const *argv[])
-{
-    const size_t capacity = 10;
-    const size_t width = sizeof(int);
-    int vals[30];
+// int main(int argc, char const *argv[])
+// {
+//     const size_t capacity = 10;
+//     const size_t width = sizeof(int);
+//     int vals[30];
 
-    const int new_val1 = 25;
-    const int new_val2 = 20;
+//     const int new_val1 = 25;
+//     const int new_val2 = 20;
 
-    ArrayList list = {};
-    checkResult(initialize_array_list(&list, capacity, width));
+//     ArrayList list = {};
+//     checkResult(initialize_array_list(&list, capacity, width));
 
-    for (size_t index = 0; index < sizeof(vals) / width; index++)
-    {
-        vals[index] = (index + 1) * 10;
-        checkResult(append_to_array_list(&list, (void *)(vals + index)));
-    }
+//     for (size_t index = 0; index < sizeof(vals) / width; index++)
+//     {
+//         vals[index] = (index + 1) * 10;
+//         checkResult(append_to_array_list(&list, (void *)(vals + index)));
+//     }
 
-    checkResult(set_array_list(&list, 2, &new_val1));
-    checkResult(insert_in_array_list(&list, 2, &new_val2));
-    checkResult(delete_index_array_list(&list, 4));
-    checkResult(display_array_list(&list, display_int));
+//     checkResult(set_array_list(&list, 2, &new_val1));
+//     checkResult(insert_in_array_list(&list, 2, &new_val2));
+//     checkResult(delete_index_array_list(&list, 4));
+//     checkResult(output_array_list(stdout, &list, display_int));
 
-    size_t current_capacity = list.length;
-    while (current_capacity >= 3)
-    {
-        checkResult(delete_index_array_list(&list, 0));
-        current_capacity--;
-    }
-    printf("\n\n\n");
-    checkResult(display_array_list(&list, display_int));
+//     size_t current_capacity = list.length;
+//     while (current_capacity >= 3)
+//     {
+//         checkResult(delete_index_array_list(&list, 0));
+//         current_capacity--;
+//     }
+//     printf("\n\n\n");
+//     checkResult(output_array_list(stdout, &list, display_int));
 
+//     checkResult(free_array_list(&list));
 
-    checkResult(free_array_list(&list));
+//     printf("Size of ArrayList is %" PRIuMAX "\n", list.length);
+//     printf("Capacity of ArrayList is %" PRIuMAX "\n", list.capacity);
 
-    printf("Size of ArrayList is %" PRIuMAX "\n", list.length);
-    printf("Capacity of ArrayList is %" PRIuMAX "\n", list.capacity);
-
-    return EXIT_SUCCESS;
-}
+//     return EXIT_SUCCESS;
+// }
