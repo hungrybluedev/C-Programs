@@ -1,13 +1,11 @@
--   [The MIT License](#the-mit-license)
-    -   [© 2019 Subhomoy Haldar](#%C2%A9-2019-subhomoy-haldar)
-    -   [Detailed terms](#detailed-terms)
-    -   [Contact Links](#contact-links)
-
 # The MIT License
 
 ## © 2019 Subhomoy Haldar
 
 If you want to contact me, refer to the links below.
+
+-   [Detailed terms](#detailed-terms)
+-   [Contact Links](#contact-links)
 
 ## Detailed terms
 
@@ -19,7 +17,7 @@ If you want to contact me, refer to the links below.
 
 ## Contact Links
 
-| Platform |                          Link |
-| -------- | ----------------------------: |
-| Twitter  | www.twitter.com/hungrybluedev |
-| GitHub   |  www.github.com/hungrybluedev |
+| Platform |                                                                                    Link |
+| -------- | --------------------------------------------------------------------------------------: |
+| Twitter  | ![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social) |
+| GitHub   |                                   [HungryBlueDev](https://github.com/HungryBlueDev) |
