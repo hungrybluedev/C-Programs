@@ -1,10 +1,14 @@
 # My Personal Collection of C Programs
+<p align="center">
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/903858d5d0f649729b2364e0e96dabc6)](https://app.codacy.com/app/hungrybluedev/C-Programs?utm_source=github.com&utm_medium=referral&utm_content=hungrybluedev/C-Programs&utm_campaign=Badge_Grade_Settings)
 
-![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social)
+[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-![Discord](https://img.shields.io/discord/581555501855277056.svg)
+[![Discord](https://img.shields.io/discord/581555501855277056.svg)](https://discord.gg/Z85ubBQ)
+
+[![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social)](https://twitter.com/HungryBlueDev)
+</p>
 
 -   [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
     -   [Introduction](#introduction)
@@ -63,11 +67,11 @@ excuses not to unit test their code. Even if it's C.
 
 If you feel that this project was of (at least some) help to you, and
 you want to repay me, then here's how to do it:
-1. **Fix errors via Issues or Pull Requests** - If you come across any error,
+1\. **Fix errors via Issues or Pull Requests** - If you come across any error,
    (intentional or not) you may raise an _Issue_. I will fix the Issue as
    soon as is possible for me to do. If you want to do it yourself, consider
    submitting a _Pull Request_ with the updated code. 
-2. **Contribute code (with the same license as I do)** - There will obviously
+2\. **Contribute code (with the same license as I do)** - There will obviously
    be several prorgams that are not currently present in this archive. You
    may generously add your own implementations (with proper documentation)
    via a _Pull Request_.
