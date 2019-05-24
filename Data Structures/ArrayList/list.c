@@ -13,6 +13,9 @@
 #include <stdbool.h>
 #include <inttypes.h>
 
+// Obtain a char * pointer to the list's void * data
+#define LIST_DATA(list) ((char *)(list)->data)
+
 #include "list.h"
 
 // NOTE: The Comment Anchor plugin in vscode is quite helpful.
@@ -83,7 +86,7 @@ char *output_array_list(FILE *out_stream,
     }
     for (size_t index = 0; index < list->length; index++)
     {
-        (*display)(out_stream, index, ((char *)list->data) + (index * list->width));
+        (*display)(out_stream, index, LIST_DATA(list) + (index * list->width));
     }
     return NULL;
 }
@@ -135,7 +138,7 @@ char *append_to_array_list(ArrayList *list,
         }
     }
     // Copy the element to the required location
-    memcpy(((char *)list->data) + (list->length * list->width), element, list->width);
+    memcpy(LIST_DATA(list) + (list->length * list->width), element, list->width);
     // Increment the value of length
     list->length++;
     return NULL;
@@ -167,7 +170,7 @@ char *add_all_to_array_list(ArrayList *list,
         }
     }
     // Copy the elements to the required location
-    memcpy(((char *)list->data) + (list->length * list->width), array, list->width * count);
+    memcpy(LIST_DATA(list) + (list->length * list->width), array, list->width * count);
 
     // Update the value of length
     list->length = new_length;
@@ -191,7 +194,7 @@ char *set_in_array_list(ArrayList *list,
     {
         return EMPTY_SRC;
     }
-    memcpy(((char *)list->data) + list->width * index, element, list->width);
+    memcpy(LIST_DATA(list) + list->width * index, element, list->width);
     return NULL;
 }
 
@@ -211,7 +214,7 @@ char *get_from_array_list(const ArrayList *list,
     {
         return "Null destination. Please provide a valid destination address.";
     }
-    memcpy(destination, ((char *)list->data) + list->width * index, list->width);
+    memcpy(destination, (LIST_DATA(list) + list->width * index), list->width);
 
     return NULL;
 }
@@ -233,7 +236,7 @@ char *insert_in_array_list(ArrayList *list,
         return EMPTY_SRC;
     }
     size_t move_length = list->length - index;
-    char *location = ((char *)list->data) + list->width * index;
+    char *location = (LIST_DATA(list) + list->width * index);
 
     // Check if we have enough space
     if (list->length == list->capacity)
@@ -250,7 +253,7 @@ char *insert_in_array_list(ArrayList *list,
     memmove(location + list->width, location, move_length * list->width);
 
     // Copy the new element in position.
-    memcpy(((char *)list->data) + list->width * index, element, list->width);
+    memcpy(LIST_DATA(list) + list->width * index, element, list->width);
 
     // Increment the value of length
     list->length++;
@@ -274,7 +277,7 @@ char *delete_index_array_list(ArrayList *list,
     // Overwrite the data with the elements that follow it.
     if (index < list->length - 1)
     {
-        char *location = ((char *)list->data) + list->width * index;
+        char *location = (LIST_DATA(list) + list->width * index);
         size_t move_length = list->length - index;
         memmove(location, location + list->width, move_length * list->width);
     }
@@ -360,8 +363,8 @@ int compare_array_lists(const ArrayList *listA,
         return (int)(listA->length - listB->length);
     }
     // Lengths are equal, compare each element
-    char *pointerA = (char *)listA->data;
-    char *pointerB = (char *)listB->data;
+    char *pointerA = LIST_DATA(listA);
+    char *pointerB = LIST_DATA(listB);
     size_t step = listA->width;
     for (size_t index = 0; index < listA->length; index++, pointerA += step, pointerB += step)
     {
