@@ -90,6 +90,7 @@ you want to repay me, then here's how to do it:
     (intentional or not) you may raise an _Issue_. I will fix the Issue as
     soon as is possible for me to do. If you want to do it yourself, consider
     submitting a _Pull Request_ with the updated code. 
+
 2.  **Contribute code (with the same license as I do)** - There will obviously
     be several prorgams that are not currently present in this archive. You
     may generously add your own implementations (with proper documentation)
