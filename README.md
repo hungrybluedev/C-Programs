@@ -1,5 +1,7 @@
 # My Personal Collection of C Programs
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/903858d5d0f649729b2364e0e96dabc6)](https://app.codacy.com/app/hungrybluedev/C-Programs?utm_source=github.com&utm_medium=referral&utm_content=hungrybluedev/C-Programs&utm_campaign=Badge_Grade_Settings)
+
 -   [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
     -   [Introduction](#introduction)
     -   [Motive](#motive)
