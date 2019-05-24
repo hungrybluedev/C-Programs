@@ -76,6 +76,10 @@ The programs are meant to be cross-platform. Here is a list of relevant programs
 -   Git
 -   GCC (and MinGW)
 
+3. [**Codacy**](https://www.codacy.com/) - A code quality monitoring service that is
+   free for open source projects, such as this one. It is very helpful as it catches
+   slip-ups or mistakes that unit tests are unable to cover.
+
 ## How can I help
 
 If you feel that this project was of (at least some) help to you, and
