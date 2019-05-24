@@ -15,6 +15,7 @@
 #define EMPTY_SRC "The address of the element provided is invalid or empty."
 
 #include <inttypes.h>
+#include <stdbool.h>
 
 /**
  * The struct to store the operational details for an ArrayList.
@@ -142,4 +143,28 @@ char *insert_in_array_list(ArrayList *list,
 
 char *delete_index_array_list(ArrayList *list,
                               const size_t index);
+
+char *set_in_array_list(ArrayList *list,
+                        const size_t index,
+                        const void *element);
+
+char *get_from_array_list(const ArrayList *list,
+                          const size_t index,
+                          void *destination);
+
+char *apply(const ArrayList *list,
+            void *result,
+            char *(*func)(
+                void *result,
+                const size_t index,
+                const void *element));
+
+char *search(const ArrayList *list,
+             size_t *index_storage,
+             const bool (*condition)(void *element));
+
+int compare_array_lists(const ArrayList *listA,
+                        const ArrayList *listB,
+                        const int (*cmp)(const void *elementA, const void *elementB));
+
 #endif //ARRAY_LIST_H

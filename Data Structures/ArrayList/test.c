@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include <math.h>
 #include "minunit.h"
 #include "list.h"
@@ -79,14 +80,14 @@ static char *addition_to_list_works()
     return NULL;
 }
 
-static char *remove_file(char *file)
+static char *remove_file(char *temp_file)
 {
-    return remove(file)
-               ? "There was an error while trying to delete the file."
+    return remove(temp_file)
+               ? "There was an error while trying to delete the temp_file."
                : NULL;
 }
 
-void print_double(FILE *out_stream, const size_t index, const void *element)
+static void print_double(FILE *out_stream, const size_t index, const void *element)
 {
     fprintf(out_stream, "%" PRIuMAX ": %.2lf\n", index, *((double *)element));
 }
@@ -110,19 +111,19 @@ static char *output_works_correctly()
 
     if (!temp_file)
     {
-        return "Could not create and open temporary file for writing.";
+        return "Could not create and open temporary temp_file for writing.";
     }
 
-    mu_assert("Could not output to file.", output_array_list(temp_file, &list, print_double) == NULL);
+    mu_assert("Could not output to temp_file.", output_array_list(temp_file, &list, print_double) == NULL);
 
     fclose(temp_file);
-    // Data written to file successfully. Now read to ensure that the data matches.
+    // Data written to temp_file successfully. Now read to ensure that the data matches.
 
     temp_file = fopen(filename, "r");
 
     if (!temp_file)
     {
-        return "Could not create and open temporary file for reading.";
+        return "Could not create and open temporary temp_file for reading.";
     }
 
     for (size_t index = 0; index < capacity; index++)
@@ -135,20 +136,207 @@ static char *output_works_correctly()
     }
 
     fclose(temp_file);
-    mu_assert("Could not remove the temporary file.", remove_file(filename) == NULL);
+    mu_assert("Could not remove the temporary temp_file.", remove_file(filename) == NULL);
 
     mu_assert("Could not free the ArrayList.", free_array_list(&list) == NULL);
     return NULL;
 }
 
+static void print_uint64_t(FILE *out_stream, const size_t index, const void *element)
+{
+    fprintf(out_stream, "%" PRIuMAX ": %" PRIu64 "\n", index, *((uint64_t *)element));
+}
+
 static char *insertion_and_deletion_work()
 {
-    return "Not implemented yet.";
+    ArrayList list = {};
+    const size_t capacity = 5;
+    const size_t width = sizeof(uint64_t);
+
+    const uint64_t initial_contents[] = {10, 20, 30, 50};
+    const uint64_t element = 40;
+
+    const size_t count = sizeof(initial_contents) / width;
+
+    mu_assert("Could not initialize ArrayList", initialize_array_list(&list, capacity, width) == NULL);
+
+    mu_assert("Error while adding all the elements to the list.", add_all_to_array_list(&list, initial_contents, count) == NULL);
+    mu_assert("Error while inserting element into the list.", insert_in_array_list(&list, 3, &element) == NULL);
+
+    mu_assert("Could not delete data properly.", delete_index_array_list(&list, 4) == NULL);
+
+    char *filename = "insertion_and_deletion.tmp";
+
+    FILE *temp_file = fopen(filename, "w");
+
+    if (!temp_file)
+    {
+        return "Could not open temporary file for writing data.";
+    }
+
+    mu_assert("Failed to write the list's data to file.", output_array_list(temp_file, &list, print_uint64_t) == NULL);
+
+    fclose(temp_file);
+
+    temp_file = fopen(filename, "r");
+
+    if (!temp_file)
+    {
+        return "Could not open temporary file for reading data.";
+    }
+
+    for (size_t index; index < count; index++)
+    {
+        size_t index_data;
+        uint64_t data;
+        uint64_t real_data = 10 * (index + 1);
+        fscanf(temp_file, "%" SCNuMAX ": %" SCNu64 "\n", &index_data, &data);
+        mu_assert("Invalid index.", index_data == index);
+        mu_assert("Invalid data.", data == real_data);
+    }
+
+    fclose(temp_file);
+    remove_file(filename);
+
+    mu_assert("Could not deallocate ArrayList", free_array_list(&list) == NULL);
+    return NULL;
+}
+
+static void print_uint8_t(FILE *out_stream, const size_t index, const void *element)
+{
+    fprintf(out_stream, "%" PRIuMAX ": %" PRIu16 "\n", index, *((uint8_t *)element));
 }
 
 static char *set_and_get_work()
 {
-    return "Not implemented yet.";
+    ArrayList list = {};
+    const size_t capacity = 5;
+    const size_t width = sizeof(uint8_t);
+
+    const uint8_t initial_contents[] = {121, 122, 123, 134, 125};
+    const uint8_t element = 124;
+
+    const size_t count = sizeof(initial_contents) / width;
+    const size_t set_idx = 3, get_idx = 4;
+
+    mu_assert("Could not initialize ArrayList", initialize_array_list(&list, capacity, width) == NULL);
+
+    mu_assert("Error while adding all the elements to the list.", add_all_to_array_list(&list, initial_contents, count) == NULL);
+    mu_assert("Error while setting an element of the list.", set_in_array_list(&list, set_idx, &element) == NULL);
+
+    uint8_t result;
+    mu_assert("Error while trying to obtain data from ArrayList.", get_from_array_list(&list, get_idx, (void *)&result) == NULL);
+
+    mu_assert("Value obtained did not match.", result == initial_contents[get_idx]);
+
+    char *filename = "set_and_get.tmp";
+
+    FILE *temp_file = fopen(filename, "w");
+
+    if (!temp_file)
+    {
+        return "Could not open temporary file for writing data.";
+    }
+
+    mu_assert("Failed to write the list's data to file.", output_array_list(temp_file, &list, print_uint8_t) == NULL);
+
+    fclose(temp_file);
+
+    temp_file = fopen(filename, "r");
+
+    if (!temp_file)
+    {
+        return "Could not open temporary file for reading data.";
+    }
+
+    for (size_t index; index < count; index++)
+    {
+        size_t index_data;
+        uint16_t data;
+        uint8_t real_data = 121;
+        fscanf(temp_file, "%" SCNuMAX ": %" SCNu16 "\n", &index_data, &data);
+        mu_assert("Invalid index.", index_data == index);
+        mu_assert("Invalid data.", data == real_data);
+    }
+
+    fclose(temp_file);
+    remove_file(filename);
+
+    mu_assert("Could not deallocate ArrayList", free_array_list(&list) == NULL);
+    return NULL;
+}
+
+static int target;
+
+static bool is_target(void *element)
+{
+    return *((int *)element) == target;
+}
+
+static const int cmp_ints(const void *a, const void *b)
+{
+    int iA = *((int *)a);
+    int iB = *((int *)b);
+    return (iA > iB) - (iA < iB);
+}
+
+static char *search_and_comparison_work()
+{
+    ArrayList list1 = {};
+    ArrayList list2 = {};
+
+    const size_t capacity = 5;
+    const size_t width = sizeof(int);
+
+    mu_assert("Could not initialize arraylist 1.",
+              initialize_array_list(&list1, capacity, width) == NULL);
+    mu_assert("Could not initialize arraylist 2.",
+              initialize_array_list(&list2, capacity, width) == NULL);
+
+    const int elements[] = {98, 65, 46, 89};
+    const size_t count = sizeof(elements) / width;
+    const int new_element1 = 101;
+    const int new_element2 = 102;
+
+    mu_assert("Failed to add elements to arraylist 1.",
+              add_all_to_array_list(&list1, elements, count) == NULL);
+    mu_assert("Failed to add elements to arraylist 2.",
+              add_all_to_array_list(&list2, elements, count) == NULL);
+
+    size_t location;
+    size_t answer = 2;
+    target = 10;
+
+    mu_assert("Search should have been unsuccessful.",
+              strcmp(search(&list1, &location, is_target), "Search unsuccessful") == 0);
+    target = elements[answer];
+    mu_assert("Search should have been successful.",
+              search(&list1, &location, is_target) == NULL);
+    
+    mu_assert("Invalid search result.", location == answer);
+
+    mu_assert("Could not append additional element to list 2.",
+              append_to_array_list(&list2, &new_element2) == NULL);
+
+    mu_assert("ArrayLists detectected as equal, while they are not.",
+              compare_array_lists(&list1, &list2, cmp_ints) < 0);
+
+    mu_assert("Could not append additional element to list 1.",
+              append_to_array_list(&list1, &new_element1) == NULL);
+
+    mu_assert("ArrayLists detectected as equal, while they are not.",
+              compare_array_lists(&list1, &list2, cmp_ints) < 0);
+
+    mu_assert("Could not insert element in arraylist 1.",
+              set_in_array_list(&list1, count, &new_element2) == NULL);
+
+    mu_assert("ArrayLists should have been equal but they are not.",
+              compare_array_lists(&list1, &list2, cmp_ints) == 0);
+
+    mu_assert("Could not deallocate arraylist 1.", free_array_list(&list1) == NULL);
+    mu_assert("Could not deallocate arraylist 2.", free_array_list(&list2) == NULL);
+
+    return NULL;
 }
 
 static char *all_tests()
@@ -157,6 +345,8 @@ static char *all_tests()
     mu_run_test(addition_to_list_works);
     mu_run_test(output_works_correctly);
     mu_run_test(insertion_and_deletion_work);
+    mu_run_test(set_and_get_work);
+    mu_run_test(search_and_comparison_work);
     return NULL;
 }
 

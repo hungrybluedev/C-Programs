@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include <inttypes.h>
 
 #include "list.h"
@@ -174,9 +175,9 @@ char *add_all_to_array_list(ArrayList *list,
     return NULL;
 }
 
-char *set_array_list(ArrayList *list,
-                     const size_t index,
-                     const void *element)
+char *set_in_array_list(ArrayList *list,
+                        const size_t index,
+                        const void *element)
 {
     if (!list)
     {
@@ -194,7 +195,7 @@ char *set_array_list(ArrayList *list,
     return NULL;
 }
 
-char *get_from_array_list(ArrayList *list,
+char *get_from_array_list(const ArrayList *list,
                           const size_t index,
                           void *destination)
 {
@@ -206,7 +207,7 @@ char *get_from_array_list(ArrayList *list,
     {
         return INVALID_INDEX;
     }
-    if (destination)
+    if (!destination)
     {
         return "Null destination. Please provide a valid destination address.";
     }
@@ -295,11 +296,46 @@ char *delete_index_array_list(ArrayList *list,
     return result;
 }
 
-// SECTION Comparison
+// SECTION Searching, Comparison and function application
+
+char *apply(const ArrayList *list,
+            void *result,
+            char *(*func)(
+                void *result,
+                const size_t index,
+                const void *element))
+{
+    char *pointer = (char *)list->data;
+    char *message;
+    for (size_t index = 0; index < 0; index++)
+    {
+        if ((message = func(result, index, (void *)pointer)))
+        {
+            return message;
+        }
+    }
+    return NULL;
+}
+
+char *search(const ArrayList *list,
+             size_t *index_storage,
+             const bool (*condition)(void *elementA))
+{
+    char *pointer = (char *)list->data;
+    for (size_t index = 0; index < list->length; index++, pointer += list->width)
+    {
+        if (condition((void *)pointer))
+        {
+            *index_storage = index;
+            return NULL;
+        }
+    }
+    return "Search unsuccessful";
+}
 
 int compare_array_lists(const ArrayList *listA,
                         const ArrayList *listB,
-                        int (*cmp)(void *elementA, void *elementB))
+                        const int (*cmp)(const void *elementA, const void *elementB))
 {
     if (!listA)
     {
@@ -315,63 +351,17 @@ int compare_array_lists(const ArrayList *listA,
     {
         return (int)(listA->length - listB->length);
     }
-    // Lengths are equal, 
+    // Lengths are equal, compare each element
+    char *pointerA = (char *)listA->data;
+    char *pointerB = (char *)listB->data;
+    size_t step = listA->width;
+    for (size_t index = 0; index < listA->length; index++, pointerA += step, pointerB += step)
+    {
+        int cmp_result = cmp((void *)pointerA, (void *)pointerB);
+        if (cmp_result)
+        {
+            return cmp_result;
+        }
+    }
     return 0;
 }
-
-//// Temporary functions for testing code. Will not be shipped.
-//// TODO: Remove once done.
-
-// void checkResult(char *message)
-// {
-//     if (message)
-//     {
-//         printf("%s\n", message);
-//         exit(EXIT_FAILURE);
-//     }
-// }
-
-// void display_int(FILE *out_stream, const size_t index, const void *element)
-// {
-//     fprintf(out_stream, "%" PRIuMAX ". %d\n", index, *((int *)element));
-// }
-
-// int main(int argc, char const *argv[])
-// {
-//     const size_t capacity = 10;
-//     const size_t width = sizeof(int);
-//     int vals[30];
-
-//     const int new_val1 = 25;
-//     const int new_val2 = 20;
-
-//     ArrayList list = {};
-//     checkResult(initialize_array_list(&list, capacity, width));
-
-//     for (size_t index = 0; index < sizeof(vals) / width; index++)
-//     {
-//         vals[index] = (index + 1) * 10;
-//         checkResult(append_to_array_list(&list, (void *)(vals + index)));
-//     }
-
-//     checkResult(set_array_list(&list, 2, &new_val1));
-//     checkResult(insert_in_array_list(&list, 2, &new_val2));
-//     checkResult(delete_index_array_list(&list, 4));
-//     checkResult(output_array_list(stdout, &list, display_int));
-
-//     size_t current_capacity = list.length;
-//     while (current_capacity >= 3)
-//     {
-//         checkResult(delete_index_array_list(&list, 0));
-//         current_capacity--;
-//     }
-//     printf("\n\n\n");
-//     checkResult(output_array_list(stdout, &list, display_int));
-
-//     checkResult(free_array_list(&list));
-
-//     printf("Size of ArrayList is %" PRIuMAX "\n", list.length);
-//     printf("Capacity of ArrayList is %" PRIuMAX "\n", list.capacity);
-
-//     return EXIT_SUCCESS;
-// }
