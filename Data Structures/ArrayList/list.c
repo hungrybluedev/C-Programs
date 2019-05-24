@@ -298,6 +298,14 @@ char *delete_index_array_list(ArrayList *list,
 
 // SECTION Searching, Comparison and function application
 
+// NOTE I make liberal use of casts to char * type from
+// the void * type. This is because while void * is good
+// for holding any type of data, it does not allow any
+// pointer arithmetic on it. char * does allow arithmetic,
+// but using it throughout would mean more work for the
+// end user. Therefore, I use char * internally, while
+// exposing only void * endpoints to the public.
+
 char *apply(const ArrayList *list,
             void *result,
             char *(*func)(
