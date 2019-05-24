@@ -2,9 +2,9 @@
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
 | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/903858d5d0f649729b2364e0e96dabc6)](https://app.codacy.com/app/hungrybluedev/C-Programs?utm_source=github.com&utm_medium=referral&utm_content=hungrybluedev/C-Programs&utm_campaign=Badge_Grade_Settings) | [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) | [![Discord](https://img.shields.io/discord/581555501855277056.svg)](https://discord.gg/Z85ubBQ) | [![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social)](https://twitter.com/HungryBlueDev) |
 
-# My Personal Collection of C Programs
+# C Programs
 
--   [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
+-   [C Programs](#c-programs)
     -   [Introduction](#introduction)
     -   [Motive](#motive)
     -   [How to use these programs?](#how-to-use-these-programs)
@@ -59,7 +59,8 @@ excuses not to unit test their code. Even if it's C.
 
 ## Recommended Software and Services
 
-The programs are meant to be cross-platform. Here is a list of relevant programs I use:
+The programs are meant to be cross-platform. Here is a list of relevant programs
+and services I use:
 
 1.  [**Visual Studio Code**](https://code.visualstudio.com/) - It has reached a level of
     maturity and acceptance that makes it well suited to be a daily-driver. Through the
@@ -76,9 +77,9 @@ The programs are meant to be cross-platform. Here is a list of relevant programs
 -   Git
 -   GCC (and MinGW)
 
-3. [**Codacy**](https://www.codacy.com/) - A code quality monitoring service that is
-   free for open source projects, such as this one. It is very helpful as it catches
-   slip-ups or mistakes that unit tests are unable to cover.
+3.  [**Codacy**](https://www.codacy.com/) - A code quality monitoring service that is
+    free for open source projects, such as this one. It is very helpful as it catches
+    slip-ups or mistakes that unit tests are unable to cover.
 
 ## How can I help
 
