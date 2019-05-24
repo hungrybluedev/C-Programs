@@ -20,4 +20,4 @@ If you want to contact me, refer to the links below.
 | Platform |                                                                                    Link |
 | -------- | --------------------------------------------------------------------------------------: |
 | Twitter  | ![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social) |
-| GitHub   |                                   [HungryBlueDev](https://github.com/HungryBlueDev) |
+| GitHub   |                                       [HungryBlueDev](https://github.com/HungryBlueDev) |
