@@ -57,18 +57,38 @@ unit testing framework and writing unit tests is super easy. Check any of my
 `test.c` files and you will agree. Having this ensures that people will have less
 excuses not to unit test their code. Even if it's C.
 
+## Recommended Software and Services
+
+The programs are meant to be cross-platform. Here is a list of relevant programs I use:
+
+1.  [**Visual Studio Code**](https://code.visualstudio.com/) - It has reached a level of
+    maturity and acceptance that makes it well suited to be a daily-driver. Through the
+    use of extensions, it can be customised to suit almost all needs. Some of the
+    extensions that I use are:
+
+-   The default [C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) from Microsoft
+-   [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors) from Exodius Studios
+-   [Remark](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-remark) from mrmlnc
+
+2.  [**Scoop**](https://scoop.sh/) - A package manager for Windows. I use it to install
+    all command line tools and utilities, including, but not limited to:
+
+-   Git
+-   GCC (and MinGW)
+
 ## How can I help
 
 If you feel that this project was of (at least some) help to you, and
 you want to repay me, then here's how to do it:
-1\. **Fix errors via Issues or Pull Requests** - If you come across any error,
-   (intentional or not) you may raise an _Issue_. I will fix the Issue as
-   soon as is possible for me to do. If you want to do it yourself, consider
-   submitting a _Pull Request_ with the updated code. 
-2\. **Contribute code (with the same license as I do)** - There will obviously
-   be several prorgams that are not currently present in this archive. You
-   may generously add your own implementations (with proper documentation)
-   via a _Pull Request_.
+
+1.  **Fix errors via Issues or Pull Requests** - If you come across any error,
+    (intentional or not) you may raise an _Issue_. I will fix the Issue as
+    soon as is possible for me to do. If you want to do it yourself, consider
+    submitting a _Pull Request_ with the updated code. 
+2.  **Contribute code (with the same license as I do)** - There will obviously
+    be several prorgams that are not currently present in this archive. You
+    may generously add your own implementations (with proper documentation)
+    via a _Pull Request_.
 
 ## List of Programs
 
