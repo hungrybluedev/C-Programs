@@ -286,7 +286,7 @@ char *delete_index_array_list(ArrayList *list,
     list->length--;
 
     // If it is just the last element, we clear it away anyway afterwards
-    memset((char *)list->data + list->length * list->width, 0, list->width);
+    memset(LIST_DATA(list) + list->length * list->width, 0, list->width);
 
     char *result = NULL;
     // If the current length is less than a quarter of the current capacoty
@@ -309,15 +309,15 @@ char *delete_index_array_list(ArrayList *list,
 // end user. Therefore, I use char * internally, while
 // exposing only void * endpoints to the public.
 
-char *apply(const ArrayList *list,
+char *apply_to_array_list(const ArrayList *list,
             void *result,
             char *(*func)(
                 void *result,
                 const size_t index,
                 const void *element))
 {
-    char *pointer = (char *)list->data;
-    for (size_t index = 0; index < list->length; index++)
+    char *pointer = LIST_DATA(list);
+    for (size_t index = 0; index < list->length; index++, pointer += list->width)
     {
         char *message;
         if ((message = func(result, index, (void *)pointer)))
@@ -328,11 +328,11 @@ char *apply(const ArrayList *list,
     return NULL;
 }
 
-char *search(const ArrayList *list,
+char *search_array_list(const ArrayList *list,
              size_t *index_storage,
              const bool (*condition)(void *elementA))
 {
-    char *pointer = (char *)list->data;
+    char *pointer = LIST_DATA(list);
     for (size_t index = 0; index < list->length; index++, pointer += list->width)
     {
         if (condition((void *)pointer))

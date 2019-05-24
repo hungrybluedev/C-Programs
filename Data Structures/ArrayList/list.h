@@ -152,14 +152,14 @@ char *get_from_array_list(const ArrayList *list,
                           const size_t index,
                           void *destination);
 
-char *apply(const ArrayList *list,
+char *apply_to_array_list(const ArrayList *list,
             void *result,
             char *(*func)(
                 void *result,
                 const size_t index,
                 const void *element));
 
-char *search(const ArrayList *list,
+char *search_array_list(const ArrayList *list,
              size_t *index_storage,
              const bool (*condition)(void *element));
 

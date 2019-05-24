@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
+#include <time.h>
 #include "minunit.h"
 #include "list.h"
 
@@ -311,10 +312,10 @@ static char *search_and_comparison_work()
     target = 10;
 
     mu_assert("Search should have been unsuccessful.",
-              strcmp(search(&list1, &location, is_target), "Search unsuccessful") == 0);
+              strcmp(search_array_list(&list1, &location, is_target), "Search unsuccessful") == 0);
     target = elements[answer];
     mu_assert("Search should have been successful.",
-              search(&list1, &location, is_target) == NULL);
+              search_array_list(&list1, &location, is_target) == NULL);
 
     mu_assert("Invalid search result.", location == answer);
 
@@ -342,6 +343,43 @@ static char *search_and_comparison_work()
     return NULL;
 }
 
+static char *operate_on_int(void *result, const size_t index, const void *element)
+{
+    double *dbl_pointer = (double *)result;
+    *dbl_pointer += *((int *)element);
+    return NULL;
+}
+
+static char *average_calculation_works()
+{
+    int elements[100];
+    const size_t width = sizeof(int);
+    const size_t size = sizeof(elements) / width;
+
+    double actual_result = 0.0;
+    for (size_t index = 0; index < size; index++)
+    {
+        elements[index] = 10 * (index + 1);
+        actual_result += elements[index];
+    }
+    actual_result /= size;
+
+    // Now perform the summation using an ArrayList
+    ArrayList list = {};
+    mu_assert("Could not initialize array list.", initialize_array_list(&list, size, width) == NULL);
+    mu_assert("Could not add elements to the array list.", add_all_to_array_list(&list, elements, size) == NULL);
+
+    double result = 0.0;
+    mu_assert("Error while applying function to the elements.",
+              apply_to_array_list(&list, &result, operate_on_int) == NULL);
+    result /= size;
+
+    mu_assert("The results (averages) do not match.", result == actual_result);
+
+    mu_assert("Error while freeing memory.", free_array_list(&list) == NULL);
+    return NULL;
+}
+
 static char *all_tests()
 {
     mu_run_test(empty_array_list_test);
@@ -350,6 +388,7 @@ static char *all_tests()
     mu_run_test(insertion_and_deletion_work);
     mu_run_test(set_and_get_work);
     mu_run_test(search_and_comparison_work);
+    mu_run_test(average_calculation_works);
     return NULL;
 }
 
