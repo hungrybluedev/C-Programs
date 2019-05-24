@@ -170,7 +170,7 @@ static char *insertion_and_deletion_work()
 
     filename = "insertion_and_deletion.tmp";
 
-    FILE *temp_file = fopen(filename, "w");
+    temp_file = fopen(filename, "w");
 
     if (!temp_file)
     {
@@ -188,7 +188,7 @@ static char *insertion_and_deletion_work()
         return "Could not open temporary file for reading data.";
     }
 
-    for (size_t index; index < count; index++)
+    for (size_t index = 0; index < count; index++)
     {
         size_t index_data;
         uint64_t data;
@@ -315,7 +315,7 @@ static char *search_and_comparison_work()
     target = elements[answer];
     mu_assert("Search should have been successful.",
               search(&list1, &location, is_target) == NULL);
-    
+
     mu_assert("Invalid search result.", location == answer);
 
     mu_assert("Could not append additional element to list 2.",
@@ -358,7 +358,12 @@ int main(int argc, char const *argv[])
     char *result = all_tests();
     if (result != 0)
     {
-        fclose(temp_file);
+        // It might be possible that a few files were not closed due to
+        // a failed test. Close them here.
+        if (temp_file)
+        {
+            fclose(temp_file);
+        }
         remove(filename);
         printf("%s\n", result);
     }
