@@ -1,14 +1,8 @@
+|                                                                                                                                Codacy                                                                                                                                |                                                     License                                                     |                                             Discord                                             |                                                            Twitter                                                           |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+| [![Codacy Badge](https://api.codacy.com/project/badge/Grade/903858d5d0f649729b2364e0e96dabc6)](https://app.codacy.com/app/hungrybluedev/C-Programs?utm_source=github.com&utm_medium=referral&utm_content=hungrybluedev/C-Programs&utm_campaign=Badge_Grade_Settings) | [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) | [![Discord](https://img.shields.io/discord/581555501855277056.svg)](https://discord.gg/Z85ubBQ) | [![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social)](https://twitter.com/HungryBlueDev) |
+
 # My Personal Collection of C Programs
-<p align="center">
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/903858d5d0f649729b2364e0e96dabc6)](https://app.codacy.com/app/hungrybluedev/C-Programs?utm_source=github.com&utm_medium=referral&utm_content=hungrybluedev/C-Programs&utm_campaign=Badge_Grade_Settings)
-
-[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-
-[![Discord](https://img.shields.io/discord/581555501855277056.svg)](https://discord.gg/Z85ubBQ)
-
-[![Twitter URL](https://img.shields.io/twitter/url/https/hungrybluedev.svg?style=social)](https://twitter.com/HungryBlueDev)
-</p>
 
 -   [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
     -   [Introduction](#introduction)
