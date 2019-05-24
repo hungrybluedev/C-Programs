@@ -1,9 +1,19 @@
+///
+/// © 2019 Subhomoy Haldar
+///
+/// This code is distributed under the MIT License.
+/// Refer to the LICENSE.md file for more information.
+///
+/// Version - 2019-05-25
+///
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
 #include <time.h>
+
 #include "minunit.h"
 #include "list.h"
 
@@ -84,6 +94,10 @@ static char *addition_to_list_works()
     return NULL;
 }
 
+/**
+ * Internal utility to remove temporary files from disk. Temporary
+ * files are created during testing.
+ */
 static char *remove_file(char *temp_file)
 {
     return remove(temp_file)

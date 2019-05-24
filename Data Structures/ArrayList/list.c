@@ -4,7 +4,7 @@
 /// This code is distributed under the MIT License.
 /// Refer to the LICENSE.md file for more information.
 ///
-/// Version - 2019-05-21
+/// Version - 2019-05-25
 ///
 
 #include <stdlib.h>
@@ -12,9 +12,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <inttypes.h>
-
-// Obtain a char * pointer to the list's void * data
-#define LIST_DATA(list) ((char *)(list)->data)
 
 #include "list.h"
 
