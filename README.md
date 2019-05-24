@@ -29,7 +29,7 @@ MIT License, therefore, fellow developers can reuse this code in their
 projects as long they provide attribution and follow the (very lenient)
 terms of use, you should be grand.
 
-## How to use these programs?
+## How to use these programs
 
 This is not meant to be a project that creates one (or a set number) of
 binaries that can be executed. It is merely a collection of different types
@@ -53,15 +53,15 @@ unit testing framework and writing unit tests is super easy. Check any of my
 `test.c` files and you will agree. Having this ensures that people will have less
 excuses not to unit test their code. Even if it's C.
 
-## How can I help?
+## How can I help
 
 If you feel that this project was of (at least some) help to you, and
 you want to repay me, then here's how to do it:
-1\. **Fix errors via Issues or Pull Requests** - If you come across any error,
+1. **Fix errors via Issues or Pull Requests** - If you come across any error,
    (intentional or not) you may raise an _Issue_. I will fix the Issue as
    soon as is possible for me to do. If you want to do it yourself, consider
    submitting a _Pull Request_ with the updated code. 
-2\. **Contribute code (with the same license as I do)** - There will obviously
+2. **Contribute code (with the same license as I do)** - There will obviously
    be several prorgams that are not currently present in this archive. You
    may generously add your own implementations (with proper documentation)
    via a _Pull Request_.

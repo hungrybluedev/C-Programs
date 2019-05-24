@@ -35,11 +35,11 @@ char *initialize_array_list(ArrayList *list,
     {
         return NULL_ARG;
     }
-    if (capacity <= 0)
+    if (capacity == 0)
     {
         return "Capacity must be positive.";
     }
-    if (width <= 0)
+    if (width == 0)
     {
         return "Invalid width. Use sizeof() operator to determine width of datatype.";
     }
@@ -183,7 +183,7 @@ char *set_in_array_list(ArrayList *list,
     {
         return NULL_ARG;
     }
-    if (index < 0 || index >= list->length)
+    if (index >= list->length)
     {
         return INVALID_INDEX;
     }
@@ -203,7 +203,7 @@ char *get_from_array_list(const ArrayList *list,
     {
         return NULL_ARG;
     }
-    if (index < 0 || index > list->length)
+    if (index > list->length)
     {
         return INVALID_INDEX;
     }
@@ -224,7 +224,7 @@ char *insert_in_array_list(ArrayList *list,
     {
         return NULL_ARG;
     }
-    if (index < 0 || index > list->length)
+    if (index > list->length)
     {
         return INVALID_INDEX;
     }
@@ -266,7 +266,7 @@ char *delete_index_array_list(ArrayList *list,
     {
         return NULL_ARG;
     }
-    if (index < 0 || index > list->length)
+    if (index > list->length)
     {
         return INVALID_INDEX;
     }
@@ -314,9 +314,9 @@ char *apply(const ArrayList *list,
                 const void *element))
 {
     char *pointer = (char *)list->data;
-    char *message;
-    for (size_t index = 0; index < 0; index++)
+    for (size_t index = 0; index < list->length; index++)
     {
+        char *message;
         if ((message = func(result, index, (void *)pointer)))
         {
             return message;

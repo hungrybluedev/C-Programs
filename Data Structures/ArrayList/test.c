@@ -8,6 +8,9 @@
 
 int tests_run = 0;
 
+char *filename;
+FILE *temp_file;
+
 /**
  * Ensures that newly created ArrayLists behave.
  */
@@ -106,8 +109,8 @@ static char *output_works_correctly()
     mu_assert("Could not initialize properly.", initialize_array_list(&list, capacity, width) == NULL);
     mu_assert("Could not add all the elements to the list.", add_all_to_array_list(&list, values, capacity) == NULL);
 
-    char *filename = "output_works_correctly.tmp";
-    FILE *temp_file = fopen(filename, "w");
+    filename = "output_works_correctly.tmp";
+    temp_file = fopen(filename, "w");
 
     if (!temp_file)
     {
@@ -165,7 +168,7 @@ static char *insertion_and_deletion_work()
 
     mu_assert("Could not delete data properly.", delete_index_array_list(&list, 4) == NULL);
 
-    char *filename = "insertion_and_deletion.tmp";
+    filename = "insertion_and_deletion.tmp";
 
     FILE *temp_file = fopen(filename, "w");
 
@@ -229,9 +232,9 @@ static char *set_and_get_work()
 
     mu_assert("Value obtained did not match.", result == initial_contents[get_idx]);
 
-    char *filename = "set_and_get.tmp";
+    filename = "set_and_get.tmp";
 
-    FILE *temp_file = fopen(filename, "w");
+    temp_file = fopen(filename, "w");
 
     if (!temp_file)
     {
@@ -249,11 +252,11 @@ static char *set_and_get_work()
         return "Could not open temporary file for reading data.";
     }
 
-    for (size_t index; index < count; index++)
+    for (size_t index = 0; index < count; index++)
     {
         size_t index_data;
         uint16_t data;
-        uint8_t real_data = 121;
+        uint8_t real_data = 121 + index;
         fscanf(temp_file, "%" SCNuMAX ": %" SCNu16 "\n", &index_data, &data);
         mu_assert("Invalid index.", index_data == index);
         mu_assert("Invalid data.", data == real_data);
@@ -355,6 +358,8 @@ int main(int argc, char const *argv[])
     char *result = all_tests();
     if (result != 0)
     {
+        fclose(temp_file);
+        remove(filename);
         printf("%s\n", result);
     }
     else
