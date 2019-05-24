@@ -1,12 +1,12 @@
 # My Personal Collection of C Programs
 
-- [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
-  - [Introduction](#introduction)
-  - [Motive](#motive)
-  - [How to use these programs?](#how-to-use-these-programs)
-  - [A Note on Unit Tests](#a-note-on-unit-tests)
-  - [How can I help?](#how-can-i-help)
-  - [List of Programs](#list-of-programs)
+-   [My Personal Collection of C Programs](#my-personal-collection-of-c-programs)
+    -   [Introduction](#introduction)
+    -   [Motive](#motive)
+    -   [How to use these programs?](#how-to-use-these-programs)
+    -   [A Note on Unit Tests](#a-note-on-unit-tests)
+    -   [How can I help?](#how-can-i-help)
+    -   [List of Programs](#list-of-programs)
 
 ## Introduction
 
@@ -57,14 +57,15 @@ excuses not to unit test their code. Even if it's C.
 
 If you feel that this project was of (at least some) help to you, and
 you want to repay me, then here's how to do it:
-1. **Fix errors via Issues or Pull Requests** - If you come across any error,
-   (intentional or not) you may raise an *Issue*. I will fix the Issue as
+1\. **Fix errors via Issues or Pull Requests** - If you come across any error,
+   (intentional or not) you may raise an _Issue_. I will fix the Issue as
    soon as is possible for me to do. If you want to do it yourself, consider
-   submitting a *Pull Request* with the updated code. 
-2. **Contribute code (with the same license as I do)** - There will obviously
+   submitting a _Pull Request_ with the updated code. 
+2\. **Contribute code (with the same license as I do)** - There will obviously
    be several prorgams that are not currently present in this archive. You
    may generously add your own implementations (with proper documentation)
-   via a *Pull Request*.
+   via a _Pull Request_.
 
 ## List of Programs
-1. [ArrayList](https://github.com/hungrybluedev/C-Programs/tree/master/Data%20Structures/ArrayList) - A dynamic, random-access array-based List implementation.
+
+1.  [ArrayList](https://github.com/hungrybluedev/C-Programs/tree/master/Data%20Structures/ArrayList) - A dynamic, random-access array-based List implementation.
