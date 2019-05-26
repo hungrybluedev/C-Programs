@@ -16,7 +16,7 @@ int main()
     }
 
     const char END_OF_STRING = '\0';
-    int ch = getchar();
+    int ch = getc(stdin);
 
     while (ch != EOF)
     {
@@ -27,7 +27,7 @@ int main()
             return EXIT_FAILURE;
         }
 
-        ch = getchar();
+        ch = getc(stdin);
     }
     result = append_to_array_list(&chars, &END_OF_STRING);
     if (result)
