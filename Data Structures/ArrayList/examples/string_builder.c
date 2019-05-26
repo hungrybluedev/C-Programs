@@ -15,9 +15,10 @@ int main()
         return EXIT_FAILURE;
     }
 
-    int ch;
     const char END_OF_STRING = '\0';
-    while ((ch = getchar()) != EOF)
+    int ch = getchar();
+
+    while (ch != EOF)
     {
         result = append_to_array_list(&chars, &ch);
         if (result)
@@ -25,6 +26,8 @@ int main()
             perror("Failed to add character to Array List.\n");
             return EXIT_FAILURE;
         }
+
+        ch = getchar();
     }
     result = append_to_array_list(&chars, &END_OF_STRING);
     if (result)
