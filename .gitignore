@@ -1,3 +1,7 @@
+# Executables, and binary files are ignored
 *.exe
 *.bin
+# Configuration files by VSCode
 .vscode/
+# All sandbox/scratch code.
+Data Structures/ArrayList/scratch/*
