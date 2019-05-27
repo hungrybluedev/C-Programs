@@ -62,7 +62,6 @@ int main()
     printf("The string read was:\n\n%s\n", LIST_DATA(&chars));
 
     result = free_array_list(&chars);
-
     return result != NULL;
 }
 ```
@@ -72,7 +71,7 @@ int main()
 ```c
 #include <stdlib.h>
 #include <stdio.h>
-#include "/list.h"
+#include "list.h"
 
 static char *operate_sum(void *storage, const size_t index, const void *element)
 {
@@ -135,3 +134,10 @@ complexity. Appending elements takes constant time, along with initialization,
 and deallocation.
 
 ## Reference
+
+For detailed information on all the public (global) functions and macros,
+read the [list.h](./list.h) file.
+
+## Copyright, Usage, etc
+
+Read the top-level [README](https://github.com/hungrybluedev/C-Programs/blob/master/README.md) for more information.
