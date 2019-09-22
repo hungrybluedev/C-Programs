@@ -95,6 +95,13 @@ you want to repay me, then here's how to do it:
     be several prorgams that are not currently present in this archive. You
     may generously add your own implementations (with proper documentation)
     via a _Pull Request_.
+    
+3.  **Consider financially supporting me** - It takes a lot of time and effort
+    to ensure that the programs I write here are of the highest quality possible.
+    If you benefitted from this project and have the means to provide some support
+    financially, you can do so via a monthly donation on
+    [Patreon](https://www.patreon.com/hungrybluedev) or a one time donation on
+    [PayPal](https://www.paypal.me/hungrybluedev).
 
 ## List of Programs
 
