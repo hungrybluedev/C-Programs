@@ -106,3 +106,6 @@ you want to repay me, then here's how to do it:
 ## List of Programs
 
 1.  [ArrayList](https://github.com/hungrybluedev/C-Programs/tree/master/Data%20Structures/ArrayList) - A dynamic, random-access array-based List implementation.
+2. [Panic](https://github.com/hungrybluedev/C-Programs/tree/master/StdLib/Panic) - A library that the program can call when a state of panic happens and we want to guarantee a graceful exit.
+3. [String](https://github.com/hungrybluedev/C-Programs/tree/master/StdLib/String) - A safe, length prefixed string implementation with lots of utility methods. Inspired by [nybbles.io's](https://www.youtube.com/channel/UCaV77OIv89qfsnncY5J2zvg) first video in the CKong series: [C11: [CKong] C introduction](https://www.youtube.com/watch?v=1KHVphJm6PU&t=109s).
+
