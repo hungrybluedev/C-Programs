@@ -1,7 +1,10 @@
 # Executables, and binary files are ignored
 *.exe
 *.bin
-# Configuration files by VSCode
+# Configuration files by VSCode and CLion
 .vscode/
+.idea/
+CMakeLists.txt
+cmake-build-debug/*
 # All sandbox/scratch code.
 Data Structures/ArrayList/scratch/*

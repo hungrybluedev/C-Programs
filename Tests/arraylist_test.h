@@ -1,0 +1,6 @@
+#ifndef C_PROGRAMS_ARRAYLIST_TEST_H
+#define C_PROGRAMS_ARRAYLIST_TEST_H
+
+char *test_arraylist();
+
+#endif // C_PROGRAMS_ARRAYLIST_TEST_H
