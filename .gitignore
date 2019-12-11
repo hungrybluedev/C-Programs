@@ -8,3 +8,4 @@ CMakeLists.txt
 cmake-build-debug/*
 # All sandbox/scratch code.
 Data Structures/ArrayList/scratch/*
+scratch.c
