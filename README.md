@@ -61,8 +61,11 @@ excuses not to unit test their code. Even if it's C.
 
 The programs are meant to be cross-platform. Here is a list of relevant programs
 and services I use:
+1.  [**CLion**](https://www.jetbrains.com/clion/) - This is my IDE of choice whenever I work on large projects. Whenver I can
+    afford to install CLion, I do. I am currently using my students' benefit to  evaluate this software for free.
+    I intend to get a CLion license for all contributors of this project, if there's enough interest.
 
-1.  [**Visual Studio Code**](https://code.visualstudio.com/) - It has reached a level of
+2.  [**Visual Studio Code**](https://code.visualstudio.com/) - It has reached a level of
     maturity and acceptance that makes it well suited to be a daily-driver. Through the
     use of extensions, it can be customised to suit almost all needs. Some of the
     extensions that I use are:
@@ -71,13 +74,13 @@ and services I use:
 -   [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors) from Exodius Studios
 -   [Remark](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-remark) from mrmlnc
 
-2.  [**Scoop**](https://scoop.sh/) - A package manager for Windows. I use it to install
+3.  [**Scoop**](https://scoop.sh/) - A package manager for Windows. I use it to install
     all command line tools and utilities, including, but not limited to:
 
 -   Git
 -   GCC (and MinGW)
 
-3.  [**Codacy**](https://www.codacy.com/) - A code quality monitoring service that is
+4.  [**Codacy**](https://www.codacy.com/) - A code quality monitoring service that is
     free for open source projects, such as this one. It is very helpful as it catches
     slip-ups or mistakes that unit tests are unable to cover.
 
