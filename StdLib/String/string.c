@@ -33,6 +33,23 @@ string_t *copy_string(const string_t *string) {
   return copy;
 }
 
+string_t *first_n(const char *cstr, size_t n) {
+  string_t *string = new_string(n);
+  assert_not_null(string);
+  char *iter = (char*) cstr;
+  size_t count = 0;
+  while (*iter && count < n) {
+    if (*iter) {
+      string->data[count++] = (uint8_t) *iter;
+    }
+    iter++;
+  }
+  if (count < n) {
+    string->len = count;
+  }
+  return string;
+}
+
 void free_string(string_t *string) {
   if (!string) {
     return;

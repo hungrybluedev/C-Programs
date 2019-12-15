@@ -31,7 +31,7 @@ and retrieving data from the array list.
 The error checking has not been included to make the code more
 readable for reference. It is recommend to always check for
 errors. Helps in debugging. Use an `if` statement to ensure that
-the return value of the functions are `NULL` (i.e. no errors). If
+the return values of the functions are `NULL` (i.e. no errors). If
 that is not the case, exit or handle the error accordingly.
 
 ### Reading the entire contents of a file to a string

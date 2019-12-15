@@ -1,3 +1,5 @@
+#ifndef C_PROGRAMS_STRING_H
+#define C_PROGRAMS_STRING_H
 /**
  * A better, safer string type for C.
  *
@@ -49,6 +51,8 @@ string_t *convert_string(const char *cstr);
  * @return A deep copy of the given string_t.
  */
 string_t *copy_string(const string_t *string);
+
+string_t *first_n(const char *cstr, size_t n);
 
 /**
  * De-allocates the memory consumed by the given (non-null) string_t.
@@ -147,3 +151,5 @@ int string_cmp(const string_t *left, const string_t *right);
  * @return The location of the first match.
  */
 size_t index_of_string(const string_t *bigger, const string_t *smaller);
+
+#endif // C_PROGRAMS_STRING_H

@@ -238,7 +238,7 @@ char *delete_index_array_list(ArrayList *list, const size_t index);
  * | Parameter name | Type         | Description                       |
  * +----------------+--------------+-----------------------------------+
  * | list           | ArrayList*   | Pointer to an existing list.      |
- * | index          | size_t       | The position to put value in.     |
+ * | index          | size_t       | The position to put values in.     |
  * | element        | void*        | Pointer to the element to insert. |
  * +----------------+--------------+-----------------------------------+
  */
@@ -246,14 +246,14 @@ char *set_in_array_list(ArrayList *list, const size_t index,
                         const void *element);
 
 /**
- * Retrieves the value at the specified index and stores the result
+ * Retrieves the values at the specified index and stores the result
  * in the destination provided. It does not affect the list.
  *
  * +----------------+--------------+-----------------------------------+
  * | Parameter name | Type         | Description                       |
  * +----------------+--------------+-----------------------------------+
  * | list           | ArrayList*   | Pointer to an existing list.      |
- * | index          | size_t       | The position to put value in.     |
+ * | index          | size_t       | The position to put values in.     |
  * | destination    | void*        | Pointer to the element's storage. |
  * +----------------+--------------+-----------------------------------+
  */
@@ -293,7 +293,7 @@ char *apply_to_array_list(const ArrayList *list, void *result,
  * +----------------+--------------+-------------------------------------------+
  * | list           | ArrayList*   | Pointer to an existing list.              |
  * | index_storage  | size_t       | Storage for index after succesful search. |
- * | (*condition)   | function     | Returns a boolean value based on the      |
+ * | (*condition)   | function     | Returns a boolean values based on the      |
  * | -  element     |  pointer     |  current element's eligibility.           |
  * +----------------+--------------+-------------------------------------------+
  */

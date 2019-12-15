@@ -136,7 +136,7 @@ char *append_to_array_list(ArrayList *list,
     }
     // Copy the element to the required location
     memcpy(LIST_DATA(list) + (list->length * list->width), element, list->width);
-    // Increment the value of length
+    // Increment the values of length
     list->length++;
     return NULL;
 }
@@ -169,7 +169,7 @@ char *add_all_to_array_list(ArrayList *list,
     // Copy the elements to the required location
     memcpy(LIST_DATA(list) + (list->length * list->width), array, list->width * count);
 
-    // Update the value of length
+    // Update the values of length
     list->length = new_length;
 
     return NULL;
@@ -252,7 +252,7 @@ char *insert_in_array_list(ArrayList *list,
     // Copy the new element in position.
     memcpy(LIST_DATA(list) + list->width * index, element, list->width);
 
-    // Increment the value of length
+    // Increment the values of length
     list->length++;
 
     return NULL;

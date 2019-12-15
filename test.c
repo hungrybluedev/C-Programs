@@ -1,6 +1,7 @@
 #include "Tests/test.h"
-#include "Tests/string_test.h"
 #include "Tests/arraylist_test.h"
+#include "Tests/dataset_test.h"
+#include "Tests/string_test.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,6 +13,7 @@ typedef char *(*test_func)();
 
 test_func tests[] = {
     test_arraylist,
+    test_dataset,
     test_string
 };
 
